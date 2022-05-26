@@ -1,0 +1,26 @@
+{
+  "name": "pr-stats",
+  "version": "0.0.0-development",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node lib/main.ts",
+    "reload": "ts-node lib/main.ts --fetch",
+    "format": "prettier --write ."
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 100,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "@types/node": "^17.0.35",
+    "@types/prettier": "^2.6.1",
+    "dotenv": "^16.0.1",
+    "octokit": "^1.7.1",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2"
+  }
+}
