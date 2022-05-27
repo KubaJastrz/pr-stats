@@ -82,14 +82,13 @@ async function fetchData(
     first: size,
     after,
   });
-  responses.push(response);
   const hasNextPage = response.repository?.pullRequests.pageInfo.hasNextPage;
   if (hasNextPage) {
     return fetchData(responses.concat(response), {
       after: response.repository?.pullRequests.pageInfo.endCursor,
     });
   }
-  return responses;
+  return responses.concat(response);
 }
 
 export async function fetch() {
