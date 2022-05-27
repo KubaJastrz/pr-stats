@@ -92,7 +92,7 @@ async function fetchData(
   return responses;
 }
 
-export async function fetchOpenPullRequests() {
+export async function fetch() {
   const responses = await fetchData();
   const final = responses[0];
   if (!final) return;

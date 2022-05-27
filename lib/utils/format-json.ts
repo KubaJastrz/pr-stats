@@ -1,5 +1,5 @@
 import { format } from 'prettier';
-import * as fs from 'node:fs';
+import fs from 'node:fs';
 
 export async function formatJsonFile(uri: string) {
   const contents = await fs.promises.readFile(uri);
