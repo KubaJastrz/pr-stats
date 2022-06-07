@@ -51,6 +51,7 @@ const argv = minimist<Argv>(process.argv.slice(2));
     }
 
     case Feature.LastWeek: {
+      console.log('wip');
     }
   }
 
