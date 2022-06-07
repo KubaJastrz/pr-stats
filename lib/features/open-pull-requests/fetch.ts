@@ -20,6 +20,13 @@ const query = /* GraphQL */ `
           number
           url
           isDraft
+          labels(first: 100) {
+            nodes {
+              id
+              name
+              color
+            }
+          }
         }
         pageInfo {
           hasNextPage
@@ -36,22 +43,31 @@ const query = /* GraphQL */ `
   }
 `;
 
+export type PullRequest = {
+  author: {
+    login: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  title: string;
+  number: number;
+  url: string;
+  isDraft: boolean;
+  labels: {
+    nodes:
+      | {
+          id: string;
+          name: string;
+          color: string;
+        }[]
+      | null;
+  } | null;
+};
+
 export type ResponseData = {
   repository: {
     pullRequests: {
-      nodes:
-        | {
-            author: {
-              login: string;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
-            title: string;
-            number: number;
-            url: string;
-            isDraft: boolean;
-          }[]
-        | null;
+      nodes: PullRequest[] | null;
       pageInfo: {
         hasNextPage: boolean;
         endCursor: string | null;

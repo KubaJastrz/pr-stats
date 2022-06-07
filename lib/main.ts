@@ -3,9 +3,10 @@ import minimist from 'minimist';
 import prompts from 'prompts';
 import { Feature } from './features';
 
-type Argv = {
+type Argv = Partial<{
   reload: boolean;
-};
+  groupByLabels: string;
+}>;
 
 const argv = minimist<Argv>(process.argv.slice(2));
 
@@ -29,11 +30,20 @@ const argv = minimist<Argv>(process.argv.slice(2));
   switch (mode) {
     case Feature.OpenPullRequests: {
       (await import('./features/open-pull-requests')).initialize({
-        reload: argv.reload,
+        reload: argv.reload ?? false,
+        options: {
+          groupByLabels: normalizeLabels(argv.groupByLabels),
+        },
       });
     }
 
     case Feature.LastWeek: {
     }
   }
+
+  console.log();
 })();
+
+function normalizeLabels(labelString: string | undefined): string[] {
+  return labelString?.split(',') ?? [];
+}

@@ -1,9 +1,11 @@
 import { Feature } from '../types';
-import { analyze } from './analyze';
+import { analyze, AnalyzeOptions } from './analyze';
 import { fetch, ResponseData } from './fetch';
 import { initializeFactory } from '../initialize';
 
-export const initialize = initializeFactory<ResponseData>(Feature.OpenPullRequests, {
+type Options = AnalyzeOptions;
+
+export const initialize = initializeFactory<ResponseData, Options>(Feature.OpenPullRequests, {
   analyze,
   fetch,
 });

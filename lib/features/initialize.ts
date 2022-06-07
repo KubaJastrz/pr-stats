@@ -1,8 +1,9 @@
 import { readDataFromFile, writeDataToFile } from '../utils/data';
 import { Feature } from './types';
 
-type Options = {
+type Options<TOptions = {}> = {
   reload: boolean;
+  options: TOptions;
 };
 
 export function initializeFactory<TData = unknown, TOptions = {}>(
@@ -11,15 +12,15 @@ export function initializeFactory<TData = unknown, TOptions = {}>(
     fetch,
     analyze,
   }: {
-    fetch: () => Promise<TData | undefined>;
-    analyze: (data: TData) => void;
+    fetch: (options: TOptions) => Promise<TData | undefined>;
+    analyze: (data: TData, options: TOptions) => void;
   },
 ) {
-  return async function initialize({ reload }: TOptions & Options) {
+  return async function initialize({ reload, options }: Options<TOptions>) {
     let data = (await readDataFromFile(feature)) as unknown;
 
     if (reload || !data) {
-      data = await fetchToFile(fetch);
+      data = await fetchToFile(() => fetch(options));
     }
 
     if (!data) {
@@ -27,7 +28,9 @@ export function initializeFactory<TData = unknown, TOptions = {}>(
       return process.exit(1);
     }
 
-    analyze(data as TData);
+    analyze(data as TData, options);
+
+    console.log();
   };
 }
 
