@@ -5,12 +5,23 @@ import { Feature } from './features';
 
 type Argv = Partial<{
   reload: boolean;
+  owner: string;
+  repository: string;
   groupByLabels: string;
 }>;
 
 const argv = minimist<Argv>(process.argv.slice(2));
 
 (async function run() {
+  if (!argv.owner) {
+    console.error('--owner is a required argument');
+    return process.exit(1);
+  }
+  if (!argv.repository) {
+    console.error('--repository is a required argument');
+    return process.exit(1);
+  }
+
   const { mode } = await prompts({
     type: 'select',
     name: 'mode',
@@ -32,6 +43,8 @@ const argv = minimist<Argv>(process.argv.slice(2));
       (await import('./features/open-pull-requests')).initialize({
         reload: argv.reload ?? false,
         options: {
+          owner: argv.owner,
+          repository: argv.repository,
           groupByLabels: normalizeLabels(argv.groupByLabels),
         },
       });

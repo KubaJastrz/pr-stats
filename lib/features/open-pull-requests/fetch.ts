@@ -82,33 +82,40 @@ export type ResponseData = {
   };
 };
 
-type FetchOptions = {
+type FetchDataOptions = {
   size?: number;
   after?: string | null;
 };
 
 async function fetchData(
+  owner: string,
+  repository: string,
   responses: ResponseData[] = [],
-  { size = 100, after }: FetchOptions = {},
+  { size = 100, after }: FetchDataOptions = {},
 ): Promise<ResponseData[]> {
   const response = await octokit.graphql<ResponseData>(query, {
-    owner: 'RampNetwork',
-    name: 'ramp-instant',
+    owner,
+    name: repository,
     states: ['OPEN'],
     first: size,
     after,
   });
   const hasNextPage = response.repository?.pullRequests.pageInfo.hasNextPage;
   if (hasNextPage) {
-    return fetchData(responses.concat(response), {
+    return fetchData(owner, repository, responses.concat(response), {
       after: response.repository?.pullRequests.pageInfo.endCursor,
     });
   }
   return responses.concat(response);
 }
 
-export async function fetch() {
-  const responses = await fetchData();
+export type FetchOptions = {
+  owner: string;
+  repository: string;
+};
+
+export async function fetch({ owner, repository }: FetchOptions) {
+  const responses = await fetchData(owner, repository);
   const final = responses[0];
   if (!final) return;
 
