@@ -12,10 +12,10 @@
   "main": "./bin/pr-stats.js",
   "files": [
     "bin",
-    "lib",
-    "tsconfig.json"
+    "dist"
   ],
   "scripts": {
+    "build": "etsc",
     "start": "esr lib/main.ts",
     "reload": "esr lib/main.ts --reload",
     "format": "prettier --write ."
@@ -32,6 +32,7 @@
     "@types/prompts": "^2.0.14",
     "dotenv": "^16.0.1",
     "esbuild": "^0.14.42",
+    "esbuild-node-tsc": "^1.8.5",
     "esbuild-runner": "^2.2.1",
     "kleur": "^4.1.4",
     "minimist": "^1.2.6",
