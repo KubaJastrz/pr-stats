@@ -6,6 +6,15 @@
     "type": "git",
     "url": "https://github.com/kubajastrz/pr-stats.git"
   },
+  "bin": {
+    "pr-stats": "./bin/pr-stats.js"
+  },
+  "main": "./bin/pr-stats.js",
+  "files": [
+    "bin",
+    "lib",
+    "tsconfig.json"
+  ],
   "scripts": {
     "start": "esr lib/main.ts",
     "reload": "esr lib/main.ts --reload",
