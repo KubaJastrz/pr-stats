@@ -1,4 +1,5 @@
 import { yellow, bold, gray, white } from 'kleur';
+import { formatDateString, formatDateTimeString } from '../../utils/format-date';
 import { PullRequest, ResponseData } from './fetch';
 
 export type AnalyzeOptions = {
@@ -101,8 +102,13 @@ function printPullRequestList(pullRequests: PullRequest[], title: string) {
   pullRequests.forEach((pr) => {
     console.log('-'.repeat(65));
     console.log(bold(`${yellow(`#${pr.number}`)} - ${pr.title}`));
-    console.log(indent(pr, gray(`Opened by ${white(pr.author!.login)} at ${white(pr.createdAt)}`)));
-    console.log(indent(pr, gray(`Last updated at ${white(pr.updatedAt)}`)));
+    console.log(
+      indent(
+        pr,
+        gray(`Opened by ${white(pr.author!.login)} on ${white(formatDateString(pr.createdAt))}`),
+      ),
+    );
+    console.log(indent(pr, gray(`Last updated at ${white(formatDateTimeString(pr.updatedAt))}`)));
     console.log(indent(pr, gray(pr.url)));
   });
   console.log('-'.repeat(65));

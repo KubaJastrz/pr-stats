@@ -1,5 +1,6 @@
 import kleur from 'kleur';
 import { readDataFromFile, writeDataToFile } from '../utils/data';
+import { formatDateTimeString } from '../utils/format-date';
 import { Feature } from './types';
 
 type Options<TOptions = {}> = {
@@ -31,7 +32,9 @@ export function initializeFactory<TData = unknown, TOptions = {}>(
 
     // @ts-expect-error
     if (data._meta?.savedAt) {
-      console.log(kleur.italic().gray(`Last updated at ${(data as any)._meta.savedAt}`));
+      console.log(
+        kleur.italic().gray(`Last updated at ${formatDateTimeString((data as any)._meta.savedAt)}`),
+      );
       console.log();
     }
 
