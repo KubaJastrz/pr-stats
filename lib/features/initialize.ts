@@ -1,3 +1,4 @@
+import kleur from 'kleur';
 import { readDataFromFile, writeDataToFile } from '../utils/data';
 import { Feature } from './types';
 
@@ -26,6 +27,12 @@ export function initializeFactory<TData = unknown, TOptions = {}>(
     if (!data) {
       console.error(`Missing data for ${feature}`);
       return process.exit(1);
+    }
+
+    // @ts-expect-error
+    if (data._meta?.savedAt) {
+      console.log(kleur.italic().gray(`Last updated at ${(data as any)._meta.savedAt}`));
+      console.log();
     }
 
     analyze(data as TData, options);

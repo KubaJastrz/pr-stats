@@ -94,8 +94,6 @@ function printLabels(pullRequests: PullRequest[], targetLabels: string[]) {
   for (const [label, pullRequests] of sortedByPullRequests) {
     printStatistics(pullRequests, bold().yellow(label));
   }
-
-  console.log();
 }
 
 function printPullRequestList(pullRequests: PullRequest[], title: string) {
