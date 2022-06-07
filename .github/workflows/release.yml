@@ -14,7 +14,6 @@ on:
 jobs:
   release:
     name: release
-    needs: [validate]
     runs-on: ubuntu-18.04
     if: |
       github.event_name == 'push' && github.event.repository.full_name == github.repository &&
