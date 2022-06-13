@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 
-require('../dist/main');
+require('esbuild-runner/register');
+require('../lib/main');

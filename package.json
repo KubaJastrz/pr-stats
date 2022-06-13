@@ -11,8 +11,7 @@
   },
   "main": "./bin/pr-stats.js",
   "files": [
-    "bin",
-    "dist"
+    "bin"
   ],
   "scripts": {
     "build": "node build.mjs",
