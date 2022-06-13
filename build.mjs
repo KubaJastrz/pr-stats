@@ -2,7 +2,7 @@
 
 import path from 'node:path';
 import { build } from 'esbuild';
-import ts from "typescript";
+import ts from 'typescript';
 
 const cwd = process.cwd();
 
@@ -13,8 +13,7 @@ async function run() {
     platform: 'node',
     minify: false,
     target: 'es2020',
-    format: 'esm',
-    outExtension: { '.js': '.mjs' },
+    format: 'cjs',
     entryPoints: [...tsConfig.fileNames],
     outdir: path.join(cwd, 'dist'),
     tsconfig: tsConfigFile,

@@ -1,3 +1,3 @@
-#!/usr/bin/env -S node --experimental-specifier-resolution=node
+#!/usr/bin/env nod
 
-import '../dist/main';
+require('../dist/main');

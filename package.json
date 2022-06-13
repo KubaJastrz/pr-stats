@@ -9,8 +9,7 @@
   "bin": {
     "pr-stats": "./bin/pr-stats.js"
   },
-  "main": "./bin/pr-stats.mjs",
-  "module": "./bin/pr-stats.mjs",
+  "main": "./bin/pr-stats.js",
   "files": [
     "bin",
     "dist"
