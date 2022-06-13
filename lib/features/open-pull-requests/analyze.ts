@@ -50,7 +50,7 @@ function printStatistics(pullRequests: PullRequest[], title: string) {
     (all, contributor) => {
       return {
         total: all.total + contributor.pullRequests.length,
-        drafts: all.drafts + contributor.pullRequests.filter(byNoDrafts).length,
+        drafts: all.drafts + contributor.pullRequests.filter(byDrafts).length,
       };
     },
     { total: 0, drafts: 0 },
@@ -65,7 +65,7 @@ function printStatistics(pullRequests: PullRequest[], title: string) {
   console.log(`Contributors - ${contributors.length}`);
   if (mostByContributor) {
     const total = mostByContributor.pullRequests;
-    const drafts = mostByContributor.pullRequests.filter(byNoDrafts);
+    const drafts = mostByContributor.pullRequests.filter(byDrafts);
     console.log(
       `Most contributions - ${mostByContributor.login} (${total.length} PRs, ${drafts.length} drafts)`,
     );

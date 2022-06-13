@@ -32,7 +32,7 @@ const argv = minimist<Argv>(process.argv.slice(2));
         value: Feature.OpenPullRequests,
       },
       {
-        title: 'last week summary',
+        title: '(wip) last week summary',
         value: Feature.LastWeek,
       },
     ],
@@ -48,10 +48,12 @@ const argv = minimist<Argv>(process.argv.slice(2));
           groupByLabels: normalizeLabels(argv.groupByLabels),
         },
       });
+      break;
     }
 
     case Feature.LastWeek: {
       console.log('wip');
+      break;
     }
   }
 
