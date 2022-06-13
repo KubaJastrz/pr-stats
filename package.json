@@ -11,7 +11,9 @@
   },
   "main": "./bin/pr-stats.js",
   "files": [
-    "bin"
+    "bin",
+    "lib",
+    "tsconfig.json"
   ],
   "scripts": {
     "build": "node build.mjs",
